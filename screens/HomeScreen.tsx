@@ -1,29 +1,29 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import UiBtn from '../UiBtn';
+import { ScrollView, StyleSheet, useWindowDimensions } from 'react-native'
 import SplashScreen from './SplashScreen';
 
-const HomeScreen = () => {
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import TopGlobal from '../components/TopGlobal';
+
+type RootStackParamList = {
+    Home: undefined;
+    Charts: undefined
+};
+
+type Props = NativeStackScreenProps<RootStackParamList, "Charts">
+
+const HomeScreen = ({ navigation }: Props) => {
+
+    const { width: windowWidth } = useWindowDimensions();
+
     return (
         <SplashScreen
             slot={
-                <View>
-                    <View>
-                        <Text style={[
-                            styles.title
-                        ]}>
-                            RN-Billboard
-                        </Text>
-
-                        <Text style={[
-                            styles.subtitle
-                        ]}>
-                            Discover Billboard's top 200 songs from different locations
-                        </Text>
-                    </View>
-
-                    <UiBtn title='Get started' type='primary' />
-                </View>
+                <ScrollView style={[
+                    styles.root
+                ]}>
+                    <TopGlobal windowWidth={windowWidth} />
+                </ScrollView>
             }
         />
     );
@@ -32,15 +32,9 @@ const HomeScreen = () => {
 export default HomeScreen
 
 const styles = StyleSheet.create({
-    title: {
-        fontSize: 56,
-        fontWeight: '800',
-        color: '#fff'
+    root: {
+        flex: 1,
+        paddingTop: 72,
+        paddingBottom: 96,
     },
-    subtitle: {
-        fontSize: 20,
-        fontWeight: '400',
-        opacity: .7,
-        color: '#fff'
-    }
 })
