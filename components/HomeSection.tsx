@@ -1,17 +1,19 @@
 import React, { ReactNode } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import PressEffect from './PressEffect';
 
 interface Props {
     title: string,
-    children: ReactNode
+    children: ReactNode,
+    divideBottom?: boolean
 }
 
 const HomeSection = (props: Props) => {
-    const { title, children } = props;
+    const { title, children, divideBottom } = props;
 
     return (
         <View style={[
-            styles.root
+            styles.root,
         ]}>
             <View style={[
                 styles.titleWrap
@@ -22,14 +24,18 @@ const HomeSection = (props: Props) => {
                     {title}
                 </Text>
 
-                <TouchableOpacity activeOpacity={0.4}>
+                <PressEffect activeOpacity={0.4}>
                     <Text style={styles.viewAll}>
                         View all
                     </Text>
-                </TouchableOpacity>
+                </PressEffect>
             </View>
 
             {children}
+
+            {
+                divideBottom ? <View style={styles.divideBottom} /> : null
+            }
         </View>
     );
 };
@@ -46,11 +52,12 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         width: '100%',
+        marginTop: 16,
         marginBottom: 8,
         paddingHorizontal: 16
     },
     title: {
-        fontSize: 24,
+        fontSize: 18,
         fontWeight: '700',
         color: '#fff',
     },
@@ -59,5 +66,12 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         padding: 4,
         paddingRight: 0
+    },
+
+    divideBottom: {
+        marginTop: 16,
+        marginHorizontal: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: '#222'
     }
 })
