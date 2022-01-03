@@ -6,11 +6,12 @@ import ChartArtistCard from './ChartArtistCard';
 
 interface Props {
     windowWidth: number,
+    divideBottom?: boolean
 }
 
 const FeaturedArtists = (props: Props) => {
 
-    const { windowWidth } = props;
+    const { windowWidth, divideBottom } = props;
 
     const screenPercent = windowWidth > 600 ? 0.30 : 0.60
 
@@ -25,6 +26,7 @@ const FeaturedArtists = (props: Props) => {
     return (
         <HomeSection
             title='Featured Top Artists'
+            divideBottom={divideBottom}
             children={
                 <CardCarousel
                     length={list.length}
