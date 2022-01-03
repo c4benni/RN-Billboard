@@ -1,5 +1,8 @@
 import { ElementType } from 'react'
-import { StyleSheet, Text, TouchableOpacity, TouchableNativeFeedback, View, Platform, } from 'react-native'
+import {
+    StyleSheet, Text, View,
+} from 'react-native'
+import PressEffect from './PressEffect'
 
 interface Props {
     title: string,
@@ -12,18 +15,8 @@ interface Props {
 const UiBtn = (props: Props) => {
     const { title, type, onPress } = props
 
-    const IOS = Platform.OS === 'ios'
-
-    const Root: ElementType =
-        IOS ?
-            TouchableOpacity
-            : TouchableNativeFeedback
-
     return (
-        <Root
-            activeOpacity={0.7}
-            onPress={onPress}
-        >
+        <PressEffect onPress={onPress}>
             <View
                 key={'root-view'}
                 style={[
@@ -38,7 +31,7 @@ const UiBtn = (props: Props) => {
                     {title}
                 </Text>
             </View>
-        </Root>
+        </PressEffect>
     )
 }
 
