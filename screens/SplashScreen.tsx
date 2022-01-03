@@ -13,7 +13,7 @@ export default function SplashScreen(props: Props) {
         <ImageBackground
             source={imageURI}
             style={styles.image}
-            blurRadius={224}
+            blurRadius={300}
         >
             {props.slot}
         </ImageBackground>
