@@ -15,13 +15,6 @@ const ChartArtistCard = (props: Props) => {
 
     const { style, title, src } = props
 
-    const IOS = Platform.OS === 'ios'
-
-    const Root: ElementType =
-        IOS ?
-            TouchableOpacity
-            : TouchableNativeFeedback
-
     return (
         <PressEffect
             style={[style]}
