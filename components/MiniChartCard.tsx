@@ -9,20 +9,17 @@ interface Props {
     subtitle: string,
     src: {
         uri: string
-    }
+    },
+    imageHeight?: number,
+    imageStyle?: object,
+    titleStyle: {},
+    subTitleStyle: {}
 }
 
 
 const MiniChartCard = (props: Props) => {
 
-    const { style, title, subtitle, src } = props
-
-    const IOS = Platform.OS === 'ios'
-
-    const Root: ElementType =
-        IOS ?
-            TouchableOpacity
-            : TouchableNativeFeedback
+    const { style, title, subtitle, src, imageHeight, imageStyle, subTitleStyle, titleStyle } = props
 
     return (
         <PressEffect
@@ -30,21 +27,30 @@ const MiniChartCard = (props: Props) => {
         >
             <Image
                 source={src}
-                style={styles.image}
+                style={[styles.image, {
+                    height: imageHeight || 164,
+                    ...imageStyle
+                }]}
             />
             <Text
-                style={styles.title}
+                style={[styles.title, titleStyle]}
             >
                 {title}
             </Text>
 
             <Text
-                style={styles.subtitle}
+                style={[styles.subtitle, subTitleStyle]}
             >
                 {subtitle}
             </Text>
         </PressEffect>
     )
+}
+
+MiniChartCard.defaultProps = {
+    imageStyle: {},
+    titleStyle: {},
+    subTitleStyle: {}
 }
 
 export default MiniChartCard;
@@ -59,8 +65,7 @@ interface style {
 const styles: style = StyleSheet.create({
     image: {
         width: '100%',
-        height: 164,
-        borderRadius: 4
+        borderRadius: 4,
     },
     title: {
         fontWeight: '500',
