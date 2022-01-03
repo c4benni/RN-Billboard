@@ -5,11 +5,12 @@ import PressEffect from './PressEffect';
 interface Props {
     title: string,
     children: ReactNode,
-    divideBottom?: boolean
+    divideBottom?: boolean,
+    showViewAll?: boolean
 }
 
 const HomeSection = (props: Props) => {
-    const { title, children, divideBottom } = props;
+    const { title, children, divideBottom, showViewAll } = props;
 
     return (
         <View style={[
@@ -24,11 +25,14 @@ const HomeSection = (props: Props) => {
                     {title}
                 </Text>
 
-                <PressEffect activeOpacity={0.4}>
-                    <Text style={styles.viewAll}>
-                        View all
-                    </Text>
-                </PressEffect>
+                {showViewAll ?
+                    <PressEffect activeOpacity={0.4}>
+                        <Text style={styles.viewAll}>
+                            View all
+                        </Text>
+                    </PressEffect>
+                    : null
+                }
             </View>
 
             {children}
@@ -39,6 +43,11 @@ const HomeSection = (props: Props) => {
         </View>
     );
 };
+
+HomeSection.defaultProps = {
+    divideBottom: true,
+    showViewAll: true
+}
 
 export default HomeSection
 
