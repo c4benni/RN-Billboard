@@ -1,5 +1,5 @@
-import React from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native'
+import React, { useState } from 'react'
+import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native'
 // import SplashScreen from './SplashScreen';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
@@ -9,6 +9,9 @@ import TrendingInCountries from '../components/TrendingInCountries';
 import GlobalGenre from '../components/GlobalGenre';
 import MoreGenres from '../components/MoreGenres';
 import CityCharts from '../components/CityChart';
+import UiInput from '../components/UiInput';
+import HomeSection from '../components/HomeSection';
+import UiBtn from '../components/UiBtn';
 
 type RootStackParamList = {
     Home: undefined;
@@ -21,43 +24,61 @@ const HomeScreen = ({ navigation }: Props) => {
 
     const { width: windowWidth } = useWindowDimensions();
 
-    // return (
-    //     <SplashScreen
-    //         slot={
-                
-    //         }
-    //     />
-    // );
+    const [searchValue, updateSearch] = useState('');
 
     return (
         <SafeAreaView style={[
             styles.root
         ]}>           
-            <ScrollView>
-                <View style={styles.titleWrap}>
-                    <Text style={styles.title}>
-                        Browse
-                    </Text>
-                </View>
-                
-                <TopGlobal windowWidth={windowWidth} divideBottom />
+            <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+            >
+                <ScrollView>
+                    <View style={styles.titleWrap}>
+                        <Text style={styles.title}>
+                            Browse
+                        </Text>
+                    </View>
 
-                <TrendingInCountries windowWidth={windowWidth} divideBottom />
+                    <TopGlobal windowWidth={windowWidth} />
 
-                <FeaturedArtists windowWidth={windowWidth} divideBottom />
+                    <TrendingInCountries windowWidth={windowWidth} />
 
-                <CityCharts windowWidth={windowWidth} divideBottom />
+                    <FeaturedArtists windowWidth={windowWidth} />
+
+                    <CityCharts windowWidth={windowWidth} />
 
 
-                <GlobalGenre windowWidth={windowWidth} divideBottom title='Afro beats to the world' />
+                    <GlobalGenre windowWidth={windowWidth} title='Afro beats to the world' />
 
-                <GlobalGenre windowWidth={windowWidth} divideBottom title='Trendy in Pop' />
+                    <GlobalGenre windowWidth={windowWidth} title='Trendy in Pop' />
 
-                <GlobalGenre windowWidth={windowWidth} divideBottom title='Hot Hip Hop Raps' />
+                    <GlobalGenre windowWidth={windowWidth} title='Hot Hip Hop Raps' />
 
-                <MoreGenres windowWidth={windowWidth} divideBottom />
+                    <MoreGenres windowWidth={windowWidth} />
 
-            </ScrollView>
+
+                    <View style={{ marginTop: 16 }}>
+                        <HomeSection title='Search artists' showViewAll={false} >
+                            <View style={{
+                                paddingHorizontal: 16
+                            }}>
+                                <UiInput value={searchValue} onChange={(text: string) => updateSearch(text)} />
+                            </View>
+                        </HomeSection>
+                    </View>
+
+                    <View style={{
+                        paddingHorizontal: 32,
+                        marginVertical: 48
+                    }}>
+                        <UiBtn
+                            title='Recognize track'
+                            type='primary'
+                        />
+                    </View>
+                </ScrollView>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     )
 };
