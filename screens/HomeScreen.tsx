@@ -5,6 +5,10 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, useWindowDimensions, View }
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import TopGlobal from '../components/TopGlobal';
 import FeaturedArtists from '../components/FeaturedArtists';
+import TrendingInCountries from '../components/TrendingInCountries';
+import GlobalGenre from '../components/GlobalGenre';
+import MoreGenres from '../components/MoreGenres';
+import CityCharts from '../components/CityChart';
 
 type RootStackParamList = {
     Home: undefined;
@@ -38,7 +42,21 @@ const HomeScreen = ({ navigation }: Props) => {
                 
                 <TopGlobal windowWidth={windowWidth} divideBottom />
 
-                <FeaturedArtists windowWidth={windowWidth} />
+                <TrendingInCountries windowWidth={windowWidth} divideBottom />
+
+                <FeaturedArtists windowWidth={windowWidth} divideBottom />
+
+                <CityCharts windowWidth={windowWidth} divideBottom />
+
+
+                <GlobalGenre windowWidth={windowWidth} divideBottom title='Afro beats to the world' />
+
+                <GlobalGenre windowWidth={windowWidth} divideBottom title='Trendy in Pop' />
+
+                <GlobalGenre windowWidth={windowWidth} divideBottom title='Hot Hip Hop Raps' />
+
+                <MoreGenres windowWidth={windowWidth} divideBottom />
+
             </ScrollView>
         </SafeAreaView>
     )
