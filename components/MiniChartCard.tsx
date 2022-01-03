@@ -1,5 +1,6 @@
 import { ElementType } from 'react'
 import { StyleSheet, TouchableOpacity, TouchableNativeFeedback, Platform, Text, Image, } from 'react-native'
+import PressEffect from './PressEffect'
 
 interface Props {
     style?: object | object[],
@@ -24,17 +25,12 @@ const MiniChartCard = (props: Props) => {
             : TouchableNativeFeedback
 
     return (
-        <Root
-            activeOpacity={0.8}
-            style={[styles.root, style]}
+        <PressEffect
+            style={[style]}
         >
             <Image
                 source={src}
-                style={{
-                    width: '100%',
-                    height: 164,
-                    borderRadius: 4
-                }}
+                style={styles.image}
             />
             <Text
                 style={styles.title}
@@ -47,30 +43,34 @@ const MiniChartCard = (props: Props) => {
             >
                 {subtitle}
             </Text>
-        </Root>
+        </PressEffect>
     )
 }
 
 export default MiniChartCard;
 
 interface style {
-    root: object,
+    image: object,
     title: object,
     subtitle: object,
 }
 
 
 const styles: style = StyleSheet.create({
-    root: {
+    image: {
+        width: '100%',
+        height: 164,
+        borderRadius: 4
     },
     title: {
         fontWeight: '500',
-        fontSize: 16,
-        color: '#fff'
+        fontSize: 15,
+        color: '#fff',
+        marginTop: 4
     },
     subtitle: {
         color: '#fff',
-        fontSize: 16,
+        fontSize: 14,
         opacity: 0.7
     }
 })
