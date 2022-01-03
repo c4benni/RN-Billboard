@@ -1,7 +1,8 @@
-import { ElementType, createElement, useState, useRef } from 'react'
-import { StyleSheet, TouchableOpacity, TouchableNativeFeedback, View, Platform, TextInput, } from 'react-native'
+import { useRef } from 'react'
+import { StyleSheet, View, Platform, TextInput, Pressable, } from 'react-native'
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import PressEffect from './PressEffect'
 
 interface Props {
     value: string,
@@ -14,20 +15,14 @@ const UiInput = (props: Props) => {
 
     const { value, onChange } = props;
 
-    const IOS = Platform.OS === 'ios'
-
     const inputRef = useRef<TextInput>(null)
-
-    const Root: ElementType =
-        IOS ?
-            TouchableOpacity
-            : TouchableNativeFeedback
 
     const idleColor = '#a7a7a7'
 
     return (
-        <Root
+        <PressEffect
             activeOpacity={0.8}
+            activeScale={0.99}
             onPress={
                 () => {
                     if (inputRef?.current) {
@@ -62,19 +57,17 @@ const UiInput = (props: Props) => {
 
                 {
                     value ?
-                        <View style={styles.clearIconWrap}>
-                            <Root activeOpacity={0.7} onPress={() => onChange('')}>
-                                <Icon
-                                    name="clear"
-                                    size={clearIconSize * 0.70}
-                                    color={'#333'}
-                                />
-                            </Root>
-                        </View>
+                        <Pressable onPress={() => onChange('')} style={styles.clearIconWrap}>
+                            <Icon
+                                name="clear"
+                                size={clearIconSize * 0.70}
+                                color={'#333'}
+                            />
+                        </Pressable>
                         : null
                 }
             </View>
-        </Root>
+        </PressEffect>
     )
 }
 
