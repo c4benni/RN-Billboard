@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import countrySchema from "./slice/countrySchema";
+import countrySchemaSlice from "./slice/countrySchema";
 import homeTopGlobalSlice from "./slice/homeTopGlobalSlice";
-import homeTrendingIn from "./slice/homeTrendingInSlice";
+import homeTrendingInSlice from "./slice/homeTrendingInSlice";
 
 const rootReducer = combineReducers({
-  countrySchema: countrySchema,
+  countrySchema: countrySchemaSlice,
   homeTopGlobal: homeTopGlobalSlice,
-  homeTrendingIn,
+  homeTrendingIn: homeTrendingInSlice,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
