@@ -33,26 +33,19 @@ const GlobalGenre = (props: Props) => {
                     length={list.length}
                     itemWidth={cardWidth}
                     gap={gap}
-                    children={
-                        <Fragment>
-                            {
-                                list.map((_, i, a) => {
-                                    return (
-                                        <MiniChartCard
-                                            key={i}
-                                            title='Easy on me'
-                                            src={{ uri: 'https://is5-ssl.mzstatic.com/image/thumb/Music115/v4/73/6d/7c/736d7cfb-c79d-c9a9-4170-5e71d008dea1/886449666430.jpg/400x400cc.jpg' }} subtitle={`Adele-${i}`}
-                                            style={{
-                                                width: cardWidth,
-                                                marginRight: i == a.length - 1 ? gap * 2 : gap,
-                                                marginLeft: i == 0 ? gap * 2 : 0
-                                            }}
-                                        />
-                                    )
-                                })
-                            }
-                        </Fragment>
-                    } />
+                    data={list}
+                    render={({ item, index }) => (
+                        <MiniChartCard
+                            title='Easy on me'
+                            img={{ src: 'https://is5-ssl.mzstatic.com/image/thumb/Music115/v4/73/6d/7c/736d7cfb-c79d-c9a9-4170-5e71d008dea1/886449666430.jpg/400x400cc.jpg', alt: '' }} subtitle={`Adele-${index}`}
+                            style={{
+                                width: cardWidth,
+                                marginRight: index == list.length - 1 ? gap * 2 : gap,
+                                marginLeft: index == 0 ? gap * 2 : 0
+                            }}
+                        />
+                    )}
+                />
             } />
     )
 
