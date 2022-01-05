@@ -50,7 +50,10 @@ const HomeScreen = ({ navigation }: Props) => {
 
                     <TopGlobal windowWidth={windowWidth} />
 
-                    <TrendingInCountries windowWidth={windowWidth} divideBottom />
+                    <TrendingInCountries
+                        windowWidth={windowWidth}
+                        divideBottom
+                    />
 
                     <FeaturedArtists windowWidth={windowWidth} />
 
