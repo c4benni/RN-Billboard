@@ -12,6 +12,8 @@ import CityCharts from '../components/CityChart';
 import UiInput from '../components/UiInput';
 import HomeSection from '../components/HomeSection';
 import UiBtn from '../components/UiBtn';
+import { useDispatch } from 'react-redux';
+import { fetchResult as fetchCountries } from '../redux/slice/countrySchema';
 
 type RootStackParamList = {
     Home: undefined;
@@ -25,6 +27,12 @@ const HomeScreen = ({ navigation }: Props) => {
     const { width: windowWidth } = useWindowDimensions();
 
     const [searchValue, updateSearch] = useState('');
+
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        dispatch(fetchCountries());
+    }, [])
 
     return (
         <SafeAreaView style={[
@@ -42,7 +50,7 @@ const HomeScreen = ({ navigation }: Props) => {
 
                     <TopGlobal windowWidth={windowWidth} />
 
-                    <TrendingInCountries windowWidth={windowWidth} />
+                    <TrendingInCountries windowWidth={windowWidth} divideBottom />
 
                     <FeaturedArtists windowWidth={windowWidth} />
 
