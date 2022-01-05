@@ -91,7 +91,7 @@ export type CountryChart = {
 export type HomeTrendingIn = {
   images: string[];
   featuring: string;
-  name: string;
+  code: CountryCode;
 };
 
 export type City = {
