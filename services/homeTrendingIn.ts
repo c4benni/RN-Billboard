@@ -1,10 +1,5 @@
-import store from "../redux/store";
 import { NetworkResponse } from "../types/api";
-import {
-  CountryCode,
-  HomeTopGlobal,
-  HomeTrendingIn,
-} from "../types/homeScreen";
+import { CountryCode, HomeTrendingIn } from "../types/homeScreen";
 import { rapidApi } from "./config";
 
 import { splitArtists } from "../utils/utils";
@@ -33,12 +28,10 @@ export default async function fetchHomeTrendingIn(): Promise<
     );
 
     if (response.kind == "success") {
-      const countries = store.getState().countrySchema.result;
-
       const body: HomeTrendingIn = {
         images: [],
         featuring: "",
-        name: countries[code]?.name || "",
+        code,
       };
 
       // const artists = [];
@@ -62,7 +55,18 @@ export default async function fetchHomeTrendingIn(): Promise<
             const splited = splitArtists(item.subtitle);
 
             if (!body.featuring) {
-              body.featuring = "Featuring ";
+              const prefixes = [
+                "Featuring music from ",
+                "Songs from ",
+                "Featuring ",
+                "Music from ",
+              ];
+
+              const max = prefixes.length - 1;
+
+              const randomNumber = Math.floor(Math.random() * max);
+
+              body.featuring = prefixes[Math.min(randomNumber, max)];
             }
 
             splited.forEach((name) => {
