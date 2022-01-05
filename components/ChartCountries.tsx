@@ -52,7 +52,7 @@ interface style {
 const styles: style = StyleSheet.create({
     image: {
         width: '100%',
-        height: 236,
+        height: 280,
         borderRadius: 8
     },
     title: {
