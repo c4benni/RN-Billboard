@@ -26,11 +26,13 @@ const ChartCountries = (props: Props) => {
             />
             <Text
                 style={styles.title}
+                numberOfLines={1}
             >
                 {title}
             </Text>
             <Text
                 style={styles.subtitle}
+                numberOfLines={2}
             >
                 {subtitle}
             </Text>
