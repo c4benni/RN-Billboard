@@ -32,38 +32,31 @@ const MoreGenres = (props: Props) => {
                     length={list.length}
                     itemWidth={cardWidth}
                     gap={gap}
-                    children={
-                        <Fragment>
-                            {
-                                list.map((_, i, a) => {
-                                    return (
-                                        <MiniChartCard
-                                            key={i}
-                                            title='Adele'
-                                            subtitle='Featuring Ed-Sheeran, Adele, PopCaan...'
-                                            src={{ uri: 'https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/a2/2d/df/a22ddf71-9254-043c-c162-11fbc25c5ff3/mzl.ilbjswky.jpg/800x800cc.jpg' }}
-                                            style={{
-                                                width: cardWidth,
-                                                marginRight: i == a.length - 1 ? gap * 2 : gap,
-                                                marginLeft: i == 0 ? gap * 2 : 0
-                                            }}
-                                            imageHeight={296}
-                                            imageStyle={{
-                                                borderRadius: 12
-                                            }}
-                                            titleStyle={{
-                                                marginTop: 8,
-                                                fontSize: 20
-                                            }}
-                                            subTitleStyle={{
-                                                fontSize: 16
-                                            }}
-                                        />
-                                    )
-                                })
-                            }
-                        </Fragment>
-                    } />
+                    data={list}
+                    render={({ item, index }) => (
+                        <MiniChartCard
+                            title='Adele'
+                            subtitle='Featuring Ed-Sheeran, Adele, PopCaan...'
+                            img={{ src: 'https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/a2/2d/df/a22ddf71-9254-043c-c162-11fbc25c5ff3/mzl.ilbjswky.jpg/800x800cc.jpg', alt: '' }}
+                            style={{
+                                width: cardWidth,
+                                marginRight: index == list.length - 1 ? gap * 2 : gap,
+                                marginLeft: index == 0 ? gap * 2 : 0
+                            }}
+                            imageHeight={296}
+                            imageStyle={{
+                                borderRadius: 12
+                            }}
+                            titleStyle={{
+                                marginTop: 8,
+                                fontSize: 20
+                            }}
+                            subTitleStyle={{
+                                fontSize: 16
+                            }}
+                        />
+                    )}
+                />
             } />
     )
 
