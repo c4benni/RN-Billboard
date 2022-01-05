@@ -20,11 +20,11 @@ export const fetchResult = createAsyncThunk<{ result?: HomeTopGlobal[] }>(
     )
 );
 
-const homeTrendingIn = createSlice({
+const homeTrendingInSlice = createSlice({
   name: "homeTrendingIn",
   initialState,
   reducers: {},
   extraReducers: (builder) => fetchBuilder(builder, fetchResult as any),
 });
 
-export default homeTrendingIn.reducer;
+export default homeTrendingInSlice.reducer;
