@@ -3,7 +3,7 @@ import { StyleSheet, Text } from "react-native";
 import CardCarousel from './CardCarousel';
 import HomeSection from './HomeSection';
 import ChartCountries from './ChartCountries';
-import { RootState } from '../redux/store';
+import store, { RootState } from '../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchResult } from '../redux/slice/homeTrendingInSlice';
 import { HomeTrendingIn } from '../types/homeScreen';
@@ -55,6 +55,8 @@ const TrendingInCountries = (props: Props) => {
         borderBottomColor: '#222',
     } : {}
 
+    const countries = store.getState().countrySchema.result
+
     return (
         <HomeSection
             title='Trending in...'
@@ -67,9 +69,9 @@ const TrendingInCountries = (props: Props) => {
                     decelerationRate={0.1}
                     data={list}
                     render={({ item, index }: { item: HomeTrendingIn, index: number }) => (<ChartCountries
-                        title={item.name}
+                        title={countries[item.code]?.name || item.code}
                         subtitle={item.featuring}
-                        src={{ uri: 'https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/a2/2d/df/a22ddf71-9254-043c-c162-11fbc25c5ff3/mzl.ilbjswky.jpg/800x800cc.jpg' }}
+                        src={{ uri: item.images[0] }}
                         style={{
                             width: cardWidth,
                             marginRight: index == list.length - 1 ? gap * 2 : gap,
