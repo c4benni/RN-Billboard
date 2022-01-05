@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { ScrollView } from 'react-native'
+import { FlatList, ListRenderItem, ScrollView } from 'react-native'
 
 interface Props {
     decelerationRate?: number,
@@ -7,15 +7,17 @@ interface Props {
     length: number,
     itemWidth: number,
     gap: number,
-    children?: ReactNode,
+    render?: ListRenderItem<any>,
     snapAlign?: "start" | "center" | "end"
+    data: any[]
 }
 
 const CardCarousel = (props: Props) => {
 
     const {
         scrollbar, decelerationRate,
-        length, itemWidth, gap, children, snapAlign
+        length, itemWidth, gap, render, snapAlign,
+        data
     } = props;
 
     const snapOffsets = Array.from({
@@ -23,15 +25,16 @@ const CardCarousel = (props: Props) => {
     }, (_, i) => (itemWidth * i) + (gap * i))
 
     return (
-        <ScrollView
+        <FlatList
             horizontal={true}
             decelerationRate={decelerationRate}
             showsHorizontalScrollIndicator={scrollbar}
             snapToOffsets={snapOffsets}
             snapToAlignment={snapAlign}
-        >
-            {children}
-        </ScrollView>
+            keyExtractor={(_, i) => i.toString()}
+            renderItem={render}
+            data={data}
+        />
     )
 }
 
