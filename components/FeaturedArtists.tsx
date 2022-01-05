@@ -32,26 +32,19 @@ const FeaturedArtists = (props: Props) => {
                     length={list.length}
                     itemWidth={cardWidth}
                     gap={gap}
-                    children={
-                        <Fragment>
-                            {
-                                list.map((_, i, a) => {
-                                    return (
-                                        <ChartArtistCard
-                                            key={i}
-                                            title='Adele'
-                                            src={{ uri: 'https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/a2/2d/df/a22ddf71-9254-043c-c162-11fbc25c5ff3/mzl.ilbjswky.jpg/800x800cc.jpg' }}
-                                            style={{
-                                                width: cardWidth,
-                                                marginRight: i == a.length - 1 ? gap * 2 : gap,
-                                                marginLeft: i == 0 ? gap * 2 : 0
-                                            }}
-                                        />
-                                    )
-                                })
-                            }
-                        </Fragment>
-                    } />
+                    data={list}
+                    render={({ item, index }) => (
+                        <ChartArtistCard
+                            title='Adele'
+                            src={{ uri: 'https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/a2/2d/df/a22ddf71-9254-043c-c162-11fbc25c5ff3/mzl.ilbjswky.jpg/800x800cc.jpg' }}
+                            style={{
+                                width: cardWidth,
+                                marginRight: index == list.length - 1 ? gap * 2 : gap,
+                                marginLeft: index == 0 ? gap * 2 : 0
+                            }}
+                        />
+                    )}
+                />
             } />
     )
 
