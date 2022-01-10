@@ -23,6 +23,7 @@ const ChartCountries = (props: Props) => {
             <Image
                 source={src}
                 style={styles.image}
+                blurRadius={200}
             />
             <Text
                 style={styles.title}
