@@ -34,10 +34,6 @@ export default async function fetchHomeTrendingIn(): Promise<
         code,
       };
 
-      // const artists = [];
-
-      // const images = [];
-
       if (Array.isArray(response.body)) {
         for (let i = 0; i < response.body.length; i++) {
           const item = response.body[i];
